@@ -97,20 +97,15 @@ def validate_input_data(data):
 
 def map_feature_names(data):
     """Map frontend field names to training field names"""
-    # Create a mapping from frontend names to training names
+    # Only map 'Cholesterol' to 'Cholesterol Level' (other fields should not be mapped)
     name_mapping = {
-        'Cholesterol': 'Cholesterol Level',
-        'Exercise Hours Per Week': 'Exercise Hours Per Week',
-        'Stress Level': 'Stress Level'
+        'Cholesterol': 'Cholesterol Level'
     }
-    
-    # Create new data dict with mapped names
+
     mapped_data = {}
     for key, value in data.items():
-        # Use mapped name if exists, otherwise use original name
         mapped_key = name_mapping.get(key, key)
         mapped_data[mapped_key] = value
-    
     return mapped_data
 
 def preprocess_input(data):
