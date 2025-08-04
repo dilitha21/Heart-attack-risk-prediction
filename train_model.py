@@ -34,30 +34,11 @@ def load_and_explore_data(file_path):
         'Cholesterol Level': 'Cholesterol Level',  # Keep as is if already correct
         'Cholesterol': 'Cholesterol Level',        # Rename if needed
     }
+    
     # Apply column renaming if needed
     df = df.rename(columns=column_mapping)
-
-    # --- Blood Pressure Preprocessing ---
-    # If 'Blood Pressure' exists, ensure it is numeric (extract systolic if needed)
-    if 'Blood Pressure' in df.columns:
-        def extract_systolic(bp):
-            if pd.isnull(bp):
-                return np.nan
-            if isinstance(bp, str) and '/' in bp:
-                try:
-                    return float(bp.split('/')[0])
-                except Exception:
-                    return np.nan
-            try:
-                return float(bp)
-            except Exception:
-                return np.nan
-        df['Blood Pressure'] = df['Blood Pressure'].apply(extract_systolic)
-        print("\nProcessed 'Blood Pressure' to extract systolic values.")
-    else:
-        print("Warning: 'Blood Pressure' column not found in dataset. This feature is required for model consistency.")
-
     print(f"\nFinal columns after standardization: {list(df.columns)}")
+    
     return df
 
 def preprocess_data(df):
@@ -250,7 +231,7 @@ def main():
     # Save all components
     save_model_components(model, scaler, label_encoders)
     
-    print("\n Model training completed successfully!")
+    print("\n🎉 Model training completed successfully!")
     print("\nYou can now use the trained model in your Flask API.")
 
 if __name__ == "__main__":
