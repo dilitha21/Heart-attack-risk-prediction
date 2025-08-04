@@ -293,15 +293,15 @@ if __name__ == '__main__':
     
     # Load model components at startup
     if load_model_components():
-        print(f"\n Starting Flask server on http://localhost:5000")
+        print(f"\nStarting Flask server on http://localhost:5000")
         print("Available endpoints:")
         print("  GET  /          - Health check")
         print("  GET  /model-info - Model information")
         print("  POST /predict   - Make predictions")
         print("\nExample prediction request:")
         print("""
-curl -X POST http://localhost:5000/predict \\
-  -H "Content-Type: application/json" \\
+curl -X POST http://localhost:5000/predict \
+  -H "Content-Type: application/json" \
   -d '{
     "Age": 45,
     "Gender": "Male",
@@ -317,8 +317,7 @@ curl -X POST http://localhost:5000/predict \\
     "Stress Level": 7
   }'
         """)
-        
         app.run(debug=True, host='0.0.0.0', port=5000)
     else:
-        print("\n Failed to load model components. Cannot start server.")
+        print("\nFailed to load model components. Cannot start server.")
         print("Please run 'python train_model.py' first to train and save the model.")

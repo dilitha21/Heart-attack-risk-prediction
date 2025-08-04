@@ -77,52 +77,52 @@ function handleFormReset() {
 
 function collectFormData() {
     try {
-        // Get all form elements
-        const age = parseInt(document.getElementById('age').value);
-        const gender = document.getElementById('gender').value;
-        const cholesterol = parseInt(document.getElementById('cholesterol').value);
-        const bloodPressure = document.getElementById('blood-pressure').value;
-        const heartRate = parseInt(document.getElementById('heart-rate').value);
-        const smoking = document.getElementById('smoking').value;
-        const exercise = parseFloat(document.getElementById('exercise').value);
-        const stress = parseInt(document.getElementById('stress').value);
-        const obesity = document.getElementById('obesity').value;
-        const diabetes = document.getElementById('diabetes').value;
-        const heartProblems = document.getElementById('heart-problems').value;
-        const medication = document.getElementById('medication').value;
-        
+        // Get all form elements using correct capitalized IDs/names
+        const age = parseInt(document.getElementById('Age').value);
+        const gender = document.getElementById('Gender').value;
+        const cholesterol = parseInt(document.getElementById('Cholesterol').value);
+        const bloodPressure = document.getElementById('Blood Pressure').value;
+        const heartRate = parseInt(document.getElementById('Heart Rate').value);
+        const smoking = document.getElementById('Smoking').value;
+        const exercise = parseFloat(document.getElementById('Exercise Hours Per Week').value);
+        const stress = parseInt(document.getElementById('Stress Level').value);
+        const obesity = document.getElementById('Obesity').value;
+        const diabetes = document.getElementById('Diabetes').value;
+        const heartProblems = document.getElementById('Previous Heart Problems').value;
+        const medication = document.getElementById('Medication Use').value;
+
         // Validate required fields
         if (!age || !gender || !cholesterol || !bloodPressure || !heartRate || 
             !smoking || exercise === '' || !stress || !obesity || !diabetes || 
             !heartProblems || !medication) {
             return null;
         }
-        
+
         // Validate blood pressure format
         if (!bloodPressure.match(/^\d{2,3}\/\d{2,3}$/)) {
             showError('Please enter blood pressure in format: 120/80');
             return null;
         }
-        
+
         // Construct data object matching API expectations
         const data = {
             'Age': age,
             'Gender': gender,
-            'Cholesterol Level': cholesterol,  // Changed from 'Cholesterol' to 'Cholesterol Level'
+            'Cholesterol': cholesterol,
             'Blood Pressure': bloodPressure,
             'Heart Rate': heartRate,
             'Smoking': smoking,
-            'Exercise Hours Per Week': exercise,
-            'Stress Level': stress,
             'Obesity': obesity,
             'Diabetes': diabetes,
             'Previous Heart Problems': heartProblems,
-            'Medication Use': medication
+            'Medication Use': medication,
+            'Exercise Hours Per Week': exercise,
+            'Stress Level': stress
         };
-        
+
         console.log('Collected form data:', data);
         return data;
-        
+
     } catch (error) {
         console.error('Error collecting form data:', error);
         return null;
@@ -268,12 +268,12 @@ async function testAPIConnection() {
     try {
         const response = await fetch(`${API_BASE_URL}/`);
         if (response.ok) {
-            console.log('✅ API connection successful');
+            console.log(' API connection successful');
         } else {
-            console.warn('⚠️ API responded but may have issues');
+            console.warn(' API responded but may have issues');
         }
     } catch (error) {
-        console.warn('⚠️ API connection failed:', error.message);
+        console.warn(' API connection failed:', error.message);
         console.log('Make sure to run: python api.py');
     }
 }

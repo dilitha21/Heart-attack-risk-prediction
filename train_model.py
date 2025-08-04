@@ -231,7 +231,7 @@ def main():
     # Save all components
     save_model_components(model, scaler, label_encoders)
     
-    print("\n🎉 Model training completed successfully!")
+    print("\nModel training completed successfully!")
     print("\nYou can now use the trained model in your Flask API.")
 
 if __name__ == "__main__":
