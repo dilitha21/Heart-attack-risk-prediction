@@ -32,9 +32,8 @@ function initializeApp() {
 }
 
 function initializeStressSlider() {
-    const stressSlider = document.getElementById('stress');
+    const stressSlider = document.getElementById('Stress Level');
     const stressValue = document.getElementById('stress-value');
-    
     if (stressSlider && stressValue) {
         stressSlider.addEventListener('input', function() {
             stressValue.textContent = this.value;
@@ -188,9 +187,9 @@ function displayResults(result) {
     
     // Display detailed probabilities if available
     if (result.probabilities) {
-        const lowRiskProb = Math.round(result.probabilities.low_risk_probability * 100);
-        const highRiskProb = Math.round(result.probabilities.high_risk_probability * 100);
-        
+        // Support both old and new API keys
+        const lowRiskProb = Math.round((result.probabilities.low_risk_probability ?? result.probabilities.low_risk) * 100);
+        const highRiskProb = Math.round((result.probabilities.high_risk_probability ?? result.probabilities.high_risk) * 100);
         riskDetails.innerHTML = `
             <h4>Detailed Probabilities:</h4>
             <div style="margin: 10px 0;">
